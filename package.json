@@ -1,0 +1,23 @@
+{
+  "name": "cypress",
+  "version": "1.0.0",
+  "description": "cypress-tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ksenyka1/Cypress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ksenyka1/Cypress/issues"
+  },
+  "homepage": "https://github.com/Ksenyka1/Cypress#readme",
+  "devDependencies": {
+    "cypress": "^15.2.0"
+  }
+}
