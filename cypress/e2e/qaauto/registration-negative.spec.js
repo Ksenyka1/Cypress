@@ -28,4 +28,49 @@ describe('Negative checks for Name field in Registration form', () => {
     cy.get('.invalid-feedback')
       .should('have.css', 'border-color', 'rgb(220, 53, 69)')
   })
+
+  it('shows "Name is required" when last name is empty', () => {
+    cy.get('#signupLastName').focus().blur()      // фокус і blur
+
+    cy.get('.invalid-feedback')          // селектор для повідомлення про помилку
+      .should('be.visible')
+      .and('contain.text', 'Last name required')
+
+    cy.get('.invalid-feedback')
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)') // червоний
+  })
+
+  it('shows "Name is required" when email is empty', () => {
+    cy.get('#signupEmail').focus().blur()      // фокус і blur
+
+    cy.get('.invalid-feedback')          // селектор для повідомлення про помилку
+      .should('be.visible')
+      .and('contain.text', 'Email required')
+
+    cy.get('.invalid-feedback')
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)') // червоний
+  })
+
+it('shows "Name is required" when password is empty', () => {
+    cy.get('#signupPassword').focus().blur()      // фокус і blur
+
+    cy.get('.invalid-feedback')          // селектор для повідомлення про помилку
+      .should('be.visible')
+      .and('contain.text', 'Password required')
+
+    cy.get('.invalid-feedback')
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)') // червоний
+  })
+
+it('shows "Name is required" when repeat password is empty', () => {
+    cy.get('#signupRepeatPassword').focus().blur()      // фокус і blur
+
+    cy.get('.invalid-feedback')          // селектор для повідомлення про помилку
+      .should('be.visible')
+      .and('contain.text', 'Re-enter password required')
+
+    cy.get('.invalid-feedback')
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)') // червоний
+  })
+
 })
