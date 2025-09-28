@@ -7,7 +7,7 @@ describe('Negative checks for Name field in Registration form', () => {
 
   it('shows "Name is required" when name is empty', () => {
     cy.get('#signupName').focus().blur()      // фокус і blur
-    cy.get('#signupLastName').focus()          // перемикаємось на last name
+    //cy.get('#signupLastName').focus()          // перемикаємось на last name
 
     cy.get('.invalid-feedback')          // селектор для повідомлення про помилку
       .should('be.visible')
@@ -19,7 +19,7 @@ describe('Negative checks for Name field in Registration form', () => {
 
   it('shows error when name has wrong characters or length', () => {
     cy.get('#signupName').type('1').blur()
-    cy.get('#signupLastName').focus()  // blur name, щоб з’явилось повідомлення
+    //cy.get('#signupLastName').focus()  // blur name, щоб з’явилось повідомлення
 
     cy.get('.invalid-feedback')
       .should('be.visible')
