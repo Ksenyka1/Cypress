@@ -7,6 +7,9 @@ module.exports = defineConfig({
       runMode: 1,
       openMode: 1,
     },
+    //env: {
+    //'USER_EMAIL': 'test1759042268652@example.com'
+    //}, 
     viewportHeight: 1080,
     viewportWidth: 1920,
     defaultCommandTimeout: 8000,
@@ -14,10 +17,11 @@ module.exports = defineConfig({
     video: true,
     screenshotOnRunFailure: true,
 
-    // Ось ця зміна
+    
     specPattern: "cypress/e2e/qaauto/**/*.spec.js"
   },
 
   projectId: "axofaa",
 });
+
 

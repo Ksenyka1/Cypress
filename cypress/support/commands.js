@@ -23,9 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+
+//
 Cypress.Commands.overwrite('type', (originalFn, subject, string, options) => {
   if (options && options.sensitive) {
-    // ховаємо логування символів у Cypress UI
+  
     options.log = false
 
     return originalFn(subject, string, options)
@@ -33,7 +36,7 @@ Cypress.Commands.overwrite('type', (originalFn, subject, string, options) => {
 
   return originalFn(subject, string, options)
 })
-
+//
 Cypress.Commands.add('login', () => {
   cy.fixture('login').then((user) => {
     cy.visit('/')
@@ -49,6 +52,12 @@ Cypress.Commands.add('login', () => {
     cy.get('.btn.btn-link.text-danger.btn-sidebar.sidebar_btn')
       .should('be.visible')
   })
+})
+//
+Cypress.Commands.add('openRegistrationForm', () => {
+  cy.visit('/')
+  cy.contains('button', 'Sign In').click()
+  cy.contains('button', 'Registration').click()
 })
 
 

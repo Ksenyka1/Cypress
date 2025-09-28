@@ -1,76 +1,191 @@
-describe('Negative checks for Name field in Registration form', () => {
+ describe('Negative checks for Name field in Registration form', () => {
   beforeEach(() => {
-    cy.visit('/')
-    cy.contains('button', 'Sign In').click()
-    cy.contains('button', 'Registration').click()
-    })
-
+    cy.openRegistrationForm()  
+  })
+//1
   it('shows "Name is required" when name is empty', () => {
-    cy.get('#signupName').focus().blur()      // фокус і blur
-    //cy.get('#signupLastName').focus()          // перемикаємось на last name
-
-    cy.get('.invalid-feedback')          // селектор для повідомлення про помилку
+    cy.get('#signupName').focus().blur()      
+    cy.get('.invalid-feedback')          
       .should('be.visible')
       .and('contain.text', 'Name required')
-
     cy.get('.invalid-feedback')
-      .should('have.css', 'border-color', 'rgb(220, 53, 69)') // червоний
-  })
-
-  it('shows error when name has wrong characters or length', () => {
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+    cy.contains('button', 'Register')
+      .should('be.disabled')
+})
+//2
+  it('shows error when name has wrong characters or length less than 2 characters', () => {
     cy.get('#signupName').type('1').blur()
-    //cy.get('#signupLastName').focus()  // blur name, щоб з’явилось повідомлення
-
     cy.get('.invalid-feedback')
       .should('be.visible')
       .and('contain.text', 'Name is invalid')
       .and('contain.text', 'Name has to be from 2 to 20 characters long')
     cy.get('.invalid-feedback')
       .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled')
   })
-
-  it('shows "Name is required" when last name is empty', () => {
-    cy.get('#signupLastName').focus().blur()      // фокус і blur
-
-    cy.get('.invalid-feedback')          // селектор для повідомлення про помилку
+//3
+  it('shows error when name has wrong characters or length more than 20 characters', () => {
+    cy.get('#signupName').type('111111111111111111111').blur()
+    cy.get('.invalid-feedback')
+      .should('be.visible')
+      .and('contain.text', 'Name is invalid')
+      .and('contain.text', 'Name has to be from 2 to 20 characters long')
+    cy.get('.invalid-feedback')
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled')
+  })
+//4
+  it('shows "Last name is required" when last name is empty', () => {
+    cy.get('#signupLastName').focus().blur()      
+    cy.get('.invalid-feedback')          
       .should('be.visible')
       .and('contain.text', 'Last name required')
-
     cy.get('.invalid-feedback')
-      .should('have.css', 'border-color', 'rgb(220, 53, 69)') // червоний
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled')
   })
-
-  it('shows "Name is required" when email is empty', () => {
-    cy.get('#signupEmail').focus().blur()      // фокус і blur
-
-    cy.get('.invalid-feedback')          // селектор для повідомлення про помилку
+//5
+it('shows error when last name has wrong characters or length less than 2 characters', () => {
+    cy.get('#signupLastName').type('1').blur()
+    cy.get('.invalid-feedback')
+      .should('be.visible')
+      .and('contain.text', 'Last name is invalid')
+      .and('contain.text', 'Last name has to be from 2 to 20 characters long')
+    cy.get('.invalid-feedback')
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled')
+  })
+//6
+ it('shows error when last name has wrong characters or length more than 20 characters', () => {
+    cy.get('#signupLastName').type('111111111111111111111').blur()
+    cy.get('.invalid-feedback')
+      .should('be.visible')
+      .and('contain.text', 'Last name is invalid')
+      .and('contain.text', 'Last name has to be from 2 to 20 characters long')
+    cy.get('.invalid-feedback')
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled')
+  })
+//7
+  it('shows "Email is required" when email is empty', () => {
+    cy.get('#signupEmail').focus().blur()      
+    cy.get('.invalid-feedback')          
       .should('be.visible')
       .and('contain.text', 'Email required')
-
     cy.get('.invalid-feedback')
-      .should('have.css', 'border-color', 'rgb(220, 53, 69)') // червоний
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled')
   })
-
-it('shows "Name is required" when password is empty', () => {
-    cy.get('#signupPassword').focus().blur()      // фокус і blur
-
-    cy.get('.invalid-feedback')          // селектор для повідомлення про помилку
+//8
+ it('shows error when email has wrong characters or length less than 2 characters', () => {
+    cy.get('#signupEmail').type('1').blur()
+    cy.get('.invalid-feedback')
+      .should('be.visible')
+      .and('contain.text', 'Email is incorrect')
+    cy.get('.invalid-feedback')
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled')
+  })
+//9
+  it('shows error when email has wrong characters or length more than 20 characters', () => {
+    cy.get('#signupEmail').type('111111111111111111111').blur()
+    cy.get('.invalid-feedback')
+      .should('be.visible')
+      .and('contain.text', 'Email is incorrect')
+    cy.get('.invalid-feedback')
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled')
+  })
+//10
+it('shows "Password is required" when password is empty', () => {
+    cy.get('#signupPassword').focus().blur()      
+    cy.get('.invalid-feedback')          
       .should('be.visible')
       .and('contain.text', 'Password required')
-
     cy.get('.invalid-feedback')
-      .should('have.css', 'border-color', 'rgb(220, 53, 69)') // червоний
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled')
+  })
+//11
+  it('shows error when password has wrong characters or length less than 2 characters', () => {
+    cy.get('#signupPassword').type('1').blur()
+    cy.get('.invalid-feedback')
+      .should('be.visible')
+      .and('contain.text', 'Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter')
+    cy.get('.invalid-feedback')
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled')
+  })
+//12
+  it('shows error when password has wrong characters or length more than 20 characters', () => {
+    cy.get('#signupPassword').type('111111111111111111111').blur()
+    cy.get('.invalid-feedback')
+      .should('be.visible')
+      .and('contain.text', 'Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter')
+    cy.get('.invalid-feedback')
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled')
   })
 
-it('shows "Name is required" when repeat password is empty', () => {
-    cy.get('#signupRepeatPassword').focus().blur()      // фокус і blur
-
-    cy.get('.invalid-feedback')          // селектор для повідомлення про помилку
+//13
+it('shows "Re-enter password required" when repeat password is empty', () => {
+    cy.get('#signupRepeatPassword').focus().blur()      
+    cy.get('.invalid-feedback')          
       .should('be.visible')
       .and('contain.text', 'Re-enter password required')
-
     cy.get('.invalid-feedback')
-      .should('have.css', 'border-color', 'rgb(220, 53, 69)') // червоний
+      .should('have.css', 'border-color', 'rgb(220, 53, 69)')
+      cy.contains('button', 'Register')
+      .should('be.disabled') 
   })
-
+//14
+it('shows error when password and re-enter password are different', () => {
+  cy.get('#signupPassword').type('ABCasdqwe123').blur()
+  cy.get('#signupRepeatPassword').type('ABCasdqwe12').blur()
+  cy.get('#signupRepeatPassword')
+    .parent()
+    .find('.invalid-feedback')
+    .should('be.visible')
+    .and('contain.text', 'Passwords do not match')
+    .and('have.css', 'color', 'rgb(220, 53, 69)')
+    cy.contains('button', 'Register')
+      .should('be.disabled')
 })
+//15
+it('does not allow register with invalid data in all fields', () => {
+  cy.get('#signupName').type('1').blur()             
+  cy.get('#signupLastName').type('1').blur()         
+  cy.get('#signupEmail').type('1').blur()            
+  cy.get('#signupPassword').type('1').blur()         
+  cy.get('#signupRepeatPassword').type('2').blur()   
+  cy.contains('button', 'Register')
+    .should('be.disabled')
+})
+//15
+it('shows error when trying to register with an already existing email', () => {
+  cy.fixture('login').then((user) => {
+    cy.get('#signupName').type('Test')
+    cy.get('#signupLastName').type('User')
+    cy.get('#signupEmail').type(user.email)
+    cy.get('#signupPassword').type(user.password)
+    cy.get('#signupRepeatPassword').type(user.password)
+    cy.contains('button', 'Register').click()
+    cy.get('.alert.alert-danger')
+      .should('be.visible')
+      .and('contain.text', 'User already exists')
+  })
+})
+})
+
