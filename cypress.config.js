@@ -13,6 +13,9 @@ module.exports = defineConfig({
     pageLoadTimeout: 30000,
     video: true,
     screenshotOnRunFailure: true,
+
+    // Ось ця зміна
+    specPattern: "cypress/e2e/qaauto/**/*.spec.js"
   },
 
   projectId: "axofaa",

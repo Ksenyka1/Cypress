@@ -23,3 +23,32 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.overwrite('type', (originalFn, subject, string, options) => {
+  if (options && options.sensitive) {
+    // ховаємо логування символів у Cypress UI
+    options.log = false
+
+    return originalFn(subject, string, options)
+  }
+
+  return originalFn(subject, string, options)
+})
+
+Cypress.Commands.add('login', () => {
+  cy.fixture('login').then((user) => {
+    cy.visit('/')
+    cy.contains('button', 'Sign In').click()
+
+    cy.get('.modal-header').should('be.visible')
+
+    cy.get('#signinEmail').type(user.email)
+    cy.get('#signinPassword', { timeout: 10000 }).type(user.password, { sensitive: true })
+
+    cy.contains('button', 'Login').click()
+
+    cy.get('.btn.btn-link.text-danger.btn-sidebar.sidebar_btn')
+      .should('be.visible')
+  })
+})
+
+
