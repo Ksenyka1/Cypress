@@ -1,0 +1,143 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-10-01T10:03:26.006Z",
+    "end": "2025-10-01T10:03:45.839Z",
+    "duration": 19833,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "cf268995-b02e-42b0-a1d8-6196ac3669f1",
+      "title": "",
+      "fullFile": "cypress\\e2e\\qaauto\\garage.spec.js",
+      "file": "cypress\\e2e\\qaauto\\garage.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "223a2a7c-ebb0-4cfb-83f6-182a4016830c",
+          "title": "Garage - Manage Cars",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "check Add Car form",
+              "fullTitle": "Garage - Manage Cars check Add Car form",
+              "timedOut": null,
+              "duration": 7847,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('button').contains('Add car').click();\ncy.get('.modal-content').should('exist');\ncy.get('#addCarBrand').should('have.value', '0: 1');\ncy.get('#addCarModel').should('have.value', '0: 1');\ncy.get('#addCarMileage').should('exist');\ncy.get('.modal-footer').contains('Add').should('be.disabled');\ncy.get('button').contains('Cancel').click();\ncy.get('.modal-content').should('not.exist');",
+              "err": {},
+              "uuid": "09ff8502-3410-48f4-9f97-ae2acb11e1f0",
+              "parentUUID": "223a2a7c-ebb0-4cfb-83f6-182a4016830c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should add first car Audi TT with mileage 50",
+              "fullTitle": "Garage - Manage Cars should add first car Audi TT with mileage 50",
+              "timedOut": null,
+              "duration": 6032,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('button').contains('Add car').click();\ncy.get('#addCarBrand').should('have.value', '0: 1');\ncy.get('#addCarModel').should('have.value', '0: 1');\ncy.get('#addCarMileage').type('50');\ncy.get('.modal-footer').contains('Add').click();\ncy.get('.car-list').contains('Audi TT').should('exist');",
+              "err": {},
+              "uuid": "a109cb16-3715-4d5c-a75b-fecd4babf61c",
+              "parentUUID": "223a2a7c-ebb0-4cfb-83f6-182a4016830c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should add second car BMW 3 with mileage 60",
+              "fullTitle": "Garage - Manage Cars should add second car BMW 3 with mileage 60",
+              "timedOut": null,
+              "duration": 5545,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('button').contains('Add car').click();\ncy.get('#addCarBrand').should('have.value', '0: 1');\ncy.get('#addCarBrand').select('1: 2');\ncy.get('#addCarModel').should('have.value', '5: 6');\ncy.get('#addCarMileage').type('60');\ncy.get('.modal-footer').contains('Add').click();\ncy.get('.car-list').contains('BMW 3').should('exist');",
+              "err": {},
+              "uuid": "cc265317-d79a-40e7-8457-e4c2e7e900d8",
+              "parentUUID": "223a2a7c-ebb0-4cfb-83f6-182a4016830c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "09ff8502-3410-48f4-9f97-ae2acb11e1f0",
+            "a109cb16-3715-4d5c-a75b-fecd4babf61c",
+            "cc265317-d79a-40e7-8457-e4c2e7e900d8"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 19424,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

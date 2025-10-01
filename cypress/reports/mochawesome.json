@@ -1,0 +1,132 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 0,
+    "pending": 0,
+    "failures": 2,
+    "start": "2025-10-01T10:02:27.940Z",
+    "end": "2025-10-01T10:03:21.953Z",
+    "duration": 54013,
+    "testsRegistered": 2,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6a459808-6c50-42b5-82cf-937dfb807de1",
+      "title": "",
+      "fullFile": "cypress\\e2e\\qaauto\\fuel-expenses.spec.js",
+      "file": "cypress\\e2e\\qaauto\\fuel-expenses.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0589cf6d-ea94-4136-8589-054ad07c227b",
+          "title": "Garage - fuel expense",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "add fuel expense for BMW 3 and verify table",
+              "fullTitle": "Garage - fuel expense add fuel expense for BMW 3 and verify table",
+              "timedOut": null,
+              "duration": 12020,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const liters = 70;\nconst totalCost = 1000;\ncy.contains('.car_name', 'BMW 3').closest('.car.jumbotron').within(() => {\n  cy.get('button.car_add-expense').click();\n});\ncy.get('.modal-content').should('exist');\ncy.get('#addExpenseCar').find(':selected').should('have.text', 'BMW 3');\nconst today = new Date();\nconst formattedDate = today.toLocaleDateString('uk-UA').replace(/\\//g, '.');\ncy.get('#addExpenseDate').should('have.value', formattedDate);\ncy.get('#addExpenseMileage').invoke('val').then(val => {\n  const nextMileage = parseInt(val || '0') + 1;\n  cy.get('#addExpenseMileage').clear().type(nextMileage);\n  cy.get('#addExpenseLiters').type(liters);\n  cy.get('#addExpenseTotalCost').type(totalCost);\n  cy.get('.modal-footer').contains('Add').click();\n  cy.get('#carSelectDropdown').contains('BMW 3').should('exist');\n  cy.get('table tbody tr').first().within(() => {\n    cy.get('td').eq(0).should('have.text', formattedDate);\n    cy.get('td').eq(1).should('have.text', nextMileage.toString());\n    cy.get('td').eq(2).should('contain', liters + 'L');\n    cy.get('td').eq(3).should('contain', totalCost + '.00 USD');\n  });\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 8000ms: expected '<input#addExpenseDate.form-control.ng-untouched.ng-pristine.ng-valid>' to have value '01.10.2025', but the value was '1.10.2025'",
+                "estack": "AssertionError: Timed out retrying after 8000ms: expected '<input#addExpenseDate.form-control.ng-untouched.ng-pristine.ng-valid>' to have value '01.10.2025', but the value was '1.10.2025'\n    at Context.eval (webpack://cypress/./cypress/e2e/qaauto/fuel-expenses.spec.js:25:28)",
+                "diff": "- '1.10.2025'\n+ '01.10.2025'\n"
+              },
+              "uuid": "94e847e4-01ac-407f-8c6e-31d3f3aff471",
+              "parentUUID": "0589cf6d-ea94-4136-8589-054ad07c227b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "add fuel expense for Audi and verify table",
+              "fullTitle": "Garage - fuel expense add fuel expense for Audi and verify table",
+              "timedOut": null,
+              "duration": 14392,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const liters = 70;\nconst totalCost = 1000;\ncy.contains('.car_name', 'Audi TT').closest('.car.jumbotron').within(() => {\n  cy.get('button.car_add-expense').click();\n});\ncy.get('.modal-content').should('exist');\ncy.get('#addExpenseCar').find(':selected').should('have.text', 'Audi TT');\nconst today = new Date();\nconst formattedDate = today.toLocaleDateString('uk-UA').replace(/\\//g, '.');\ncy.get('#addExpenseDate').should('have.value', formattedDate);\ncy.get('#addExpenseMileage').invoke('val').then(val => {\n  const nextMileage = parseInt(val || '0') + 1;\n  cy.get('#addExpenseMileage').clear().type(nextMileage);\n});\ncy.get('#addExpenseLiters').type('70');\ncy.get('#addExpenseTotalCost').type('1000');\ncy.get('.modal-footer').contains('Add').click();\ncy.get('#carSelectDropdown').contains('Audi TT').should('exist');\ncy.get('table tbody tr').first().within(() => {\n  cy.get('td').eq(0).should('have.text', formattedDate);\n  cy.get('td').eq(2).should('contain', liters + 'L');\n  cy.get('td').eq(3).should('contain', totalCost + '.00 USD');\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 8000ms: expected '<input#addExpenseDate.form-control.ng-untouched.ng-pristine.ng-valid>' to have value '01.10.2025', but the value was '1.10.2025'",
+                "estack": "AssertionError: Timed out retrying after 8000ms: expected '<input#addExpenseDate.form-control.ng-untouched.ng-pristine.ng-valid>' to have value '01.10.2025', but the value was '1.10.2025'\n    at Context.eval (webpack://cypress/./cypress/e2e/qaauto/fuel-expenses.spec.js:66:28)",
+                "diff": "- '1.10.2025'\n+ '01.10.2025'\n"
+              },
+              "uuid": "703934e4-24ff-4078-931b-10cbf8cdccdf",
+              "parentUUID": "0589cf6d-ea94-4136-8589-054ad07c227b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "94e847e4-01ac-407f-8c6e-31d3f3aff471",
+            "703934e4-24ff-4078-931b-10cbf8cdccdf"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 26412,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

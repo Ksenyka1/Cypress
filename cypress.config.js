@@ -1,15 +1,14 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
+  projectId: "axofaa",
+
   e2e: {
-    baseUrl: 'https://guest:welcome2qauto@qauto.forstudy.space',
+    baseUrl: "https://guest:welcome2qauto@qauto.forstudy.space",
     retries: {
       runMode: 1,
       openMode: 1,
     },
-    //env: {
-    //'USER_EMAIL': 'test1759042268652@example.com'
-    //}, 
     viewportHeight: 1080,
     viewportWidth: 1920,
     defaultCommandTimeout: 8000,
@@ -17,11 +16,22 @@ module.exports = defineConfig({
     video: true,
     screenshotOnRunFailure: true,
 
-    
-    specPattern: "cypress/e2e/qaauto/**/*.spec.js"
-  },
+    specPattern: "cypress/e2e/qaauto/**/*.spec.js",
+    supportFile: "cypress/support/e2e.js",   
 
-  projectId: "axofaa",
+    reporter: "mochawesome",
+    reporterOptions: {
+      reportDir: "cypress/reports",
+      overwrite: false,
+      html: true,
+      json: true,
+    },
+
+    setupNodeEvents(on, config) {
+      return config;
+    },
+  },
 });
+
 
 
