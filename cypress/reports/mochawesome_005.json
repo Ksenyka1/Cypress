@@ -1,0 +1,181 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-10-05T05:16:58.554Z",
+    "end": "2025-10-05T05:17:16.893Z",
+    "duration": 18339,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ebcd5ea6-730e-49d4-b6d2-b3642f332fd1",
+      "title": "",
+      "fullFile": "cypress\\e2e\\qaauto\\request.spec.js",
+      "file": "cypress\\e2e\\qaauto\\request.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "cd9e2b6d-c442-43b3-bc77-188e6085d6fa",
+          "title": "API tests - create car interception and expenses",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should intercept POST /api/cars and save BMW 3 id",
+              "fullTitle": "API tests - create car interception and expenses should intercept POST /api/cars and save BMW 3 id",
+              "timedOut": null,
+              "duration": 6248,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept('POST', '**/api/cars').as('createCar');\ncy.contains('button', 'Add car').click();\ncy.get('#addCarBrand').should('have.value', '0: 1');\ncy.get('#addCarModel').should('have.value', '0: 1');\ncy.get('#addCarMileage').type('123');\ncy.get('.modal-footer').contains('Add').click();\ncy.wait('@createCar').then(interception => {\n  expect(interception.response.statusCode).to.eq(201);\n  const createdCarId = interception.response.body.data.id;\n  expect(createdCarId).to.exist;\n  cy.writeFile('cypress/fixtures/createdCar.json', [{\n    id: createdCarId,\n    mileage: 123\n  }]);\n});",
+              "err": {},
+              "uuid": "f373a600-0c91-45bf-b9d7-08628831c332",
+              "parentUUID": "cd9e2b6d-c442-43b3-bc77-188e6085d6fa",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should intercept POST /api/cars and save Audi TT id",
+              "fullTitle": "API tests - create car interception and expenses should intercept POST /api/cars and save Audi TT id",
+              "timedOut": null,
+              "duration": 3617,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept('POST', '**/api/cars').as('createCar');\ncy.contains('button', 'Add car').click();\ncy.get('#addCarBrand').should('have.value', '0: 1');\ncy.get('#addCarBrand').select('1: 2');\ncy.get('#addCarModel').should('have.value', '5: 6');\ncy.get('#addCarMileage').type('60');\ncy.get('.modal-footer').contains('Add').click();\ncy.wait('@createCar').then(interception => {\n  expect(interception.response.statusCode).to.eq(201);\n  const createdCarId = interception.response.body.data.id;\n  expect(createdCarId).to.exist;\n  cy.readFile('cypress/fixtures/createdCar.json').then((cars = []) => {\n    cars.push({\n      id: createdCarId,\n      mileage: 60\n    });\n    cy.writeFile('cypress/fixtures/createdCar.json', cars);\n  });\n});",
+              "err": {},
+              "uuid": "a7a5ca1b-4ec5-4c52-a064-753bfb1f4027",
+              "parentUUID": "cd9e2b6d-c442-43b3-bc77-188e6085d6fa",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "verify that created cars exist GET /api/cars",
+              "fullTitle": "API tests - create car interception and expenses verify that created cars exist GET /api/cars",
+              "timedOut": null,
+              "duration": 2828,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.readFile('cypress/fixtures/createdCar.json').then(cars => {\n  cy.request('GET', 'https://qauto.forstudy.space/api/cars').then(res => {\n    expect(res.status).to.eq(200);\n    cars.forEach(car => {\n      const foundCar = res.body.data.find(c => c.id === car.id);\n      expect(foundCar).to.exist;\n      expect(foundCar.mileage).to.eq(car.mileage);\n    });\n  });\n});",
+              "err": {},
+              "uuid": "1fefa605-1d6b-46a6-8021-1c399c1b8900",
+              "parentUUID": "cd9e2b6d-c442-43b3-bc77-188e6085d6fa",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should create expense for BMW 3 and validate response",
+              "fullTitle": "API tests - create car interception and expenses should create expense for BMW 3 and validate response",
+              "timedOut": null,
+              "duration": 2763,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.readFile('cypress/fixtures/createdCar.json').then(cars => {\n  const bmw = cars[0];\n  const todayMileage = 125;\n  cy.request({\n    method: 'POST',\n    url: 'https://qauto.forstudy.space/api/expenses',\n    body: {\n      carId: bmw.id,\n      mileage: todayMileage + 1,\n      liters: 70,\n      totalCost: 1000,\n      reportedAt: new Date().toISOString().split('T')[0],\n      forceMileage: false\n    },\n    failOnStatusCode: false\n  }).then(res => {\n    cy.log(JSON.stringify(res.body));\n    expect(res.status).to.eq(200);\n  });\n});",
+              "err": {},
+              "uuid": "43af47d6-e5b3-46a4-b7fe-98c88ac5bd92",
+              "parentUUID": "cd9e2b6d-c442-43b3-bc77-188e6085d6fa",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should create expense for Audi TT and validate response",
+              "fullTitle": "API tests - create car interception and expenses should create expense for Audi TT and validate response",
+              "timedOut": null,
+              "duration": 2743,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.readFile('cypress/fixtures/createdCar.json').then(cars => {\n  const audi = cars[1];\n  cy.request({\n    method: 'POST',\n    url: 'https://qauto.forstudy.space/api/expenses',\n    body: {\n      carId: audi.id,\n      mileage: 81,\n      liters: 50,\n      totalCost: 900,\n      reportedAt: new Date().toISOString().split('T')[0],\n      forceMileage: false\n    },\n    failOnStatusCode: false\n  }).then(res => {\n    cy.log(JSON.stringify(res.body));\n    expect(res.status).to.eq(200);\n  });\n});",
+              "err": {},
+              "uuid": "3ee70a42-103d-4bff-9d83-66e79b49cf86",
+              "parentUUID": "cd9e2b6d-c442-43b3-bc77-188e6085d6fa",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f373a600-0c91-45bf-b9d7-08628831c332",
+            "a7a5ca1b-4ec5-4c52-a064-753bfb1f4027",
+            "1fefa605-1d6b-46a6-8021-1c399c1b8900",
+            "43af47d6-e5b3-46a4-b7fe-98c88ac5bd92",
+            "3ee70a42-103d-4bff-9d83-66e79b49cf86"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 18199,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

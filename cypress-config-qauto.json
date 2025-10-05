@@ -1,0 +1,9 @@
+{
+  "baseUrl": "https://guest:welcomeqauto@qauto.forstudy.space/",
+  "env": {
+    "userEmail": "guest_auto@example.com",
+    "userPassword": "Welcome2qauto"
+  }
+}
+
+
