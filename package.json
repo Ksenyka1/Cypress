@@ -1,0 +1,34 @@
+{
+  "name": "cypress",
+  "version": "1.0.0",
+  "description": "cypress-tests",
+  "main": "index.js",
+  "scripts": {
+    "test:qauto": "cypress run --config-file cypress-config-qauto.json",
+    "test:qauto2": "cypress run --config-file cypress-config-qauto2.json",
+    "open:qauto": "cypress open --config-file cypress-config-qauto.json",
+    "open:qauto2": "cypress open --config-file cypress-config-qauto2.json",
+
+    "merge-reports": "mochawesome-merge cypress/reports/*.json > cypress/reports/report.json",
+    "generate-report": "marge cypress/reports/report.json --reportDir cypress/reports",
+    "report": "npm run merge-reports && npm run generate-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ksenyka1/Cypress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ksenyka1/Cypress/issues"
+  },
+  "homepage": "https://github.com/Ksenyka1/Cypress#readme",
+  "devDependencies": {
+    "cypress": "^15.3.0",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.0"
+  }
+}
+
